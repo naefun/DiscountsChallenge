@@ -23,7 +23,7 @@ class UnidaysDiscountChallengeTest {
         unidaysDiscountChallenge = new UnidaysDiscountChallenge(pricingRules);
     }
 
-    private static Stream<Arguments> provideStringsForIsBlank() {
+    private static Stream<Arguments> testCases() {
         return Stream.of(
                 Arguments.of("", 0, 0, 0),
                 Arguments.of("A", 1, 8, 7),
@@ -49,8 +49,8 @@ class UnidaysDiscountChallengeTest {
     }
 
     @ParameterizedTest
-    @MethodSource("provideStringsForIsBlank")
-    void isBlank_ShouldReturnTrueForNullOrBlankStrings(String items, int expectedSize, float expectedTotal, float expectedDelivery) {
+    @MethodSource("testCases")
+    void addToBasketAndCalculateTotalTest(String items, int expectedSize, float expectedTotal, float expectedDelivery) {
         addItemsToBasket(items);
         TotalPrice totalPrice = unidaysDiscountChallenge.calculateTotalPrice();
 
